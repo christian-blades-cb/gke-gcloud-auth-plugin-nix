@@ -13,10 +13,11 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in
           rec {
-            packages = flattenTree {
+            packages = flattenTree rec {
               gke-gcloud-auth-plugin = pkgs.callPackage ./package.nix { };
+              default = gke-gcloud-auth-plugin;
             };
-            defaultPackage = packages.gke-gcloud-auth-plugin;
+            # defaultPackage = packages.gke-gcloud-auth-plugin;
           }
       );
 
