@@ -19,6 +19,11 @@
             };
             # defaultPackage = packages.gke-gcloud-auth-plugin;
           }
-      );
+      ) // {
+        overlays = rec {
+          gke-gcloud-auth-plugin = final: prev: { gke-gcloud-auth-plugin = self.packages.${prev.stdenv.hostPlatform.system}.gke-gcloud-auth-plugin; };
+          default = gke-gcloud-auth-plugin;
+        };
+      };
 
 }
